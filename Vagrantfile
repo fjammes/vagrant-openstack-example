@@ -1,3 +1,7 @@
+HOST_NUMBER=3
+HOST_PREFIX="fjammes"
+
+
 required_plugins = %w{
   vagrant-openstack-provider
   vagrant-hostmanager
@@ -11,10 +15,8 @@ if not plugins_to_install.empty?
 end
 
 def n_slaves
-    (1..3)
+    (1..HOST_NUMBER)
 end
-
-host_prefix="fjammes"
 
 Vagrant.configure('2') do |config|
   config.ssh.username = 'ubuntu'
@@ -31,7 +33,7 @@ Vagrant.configure('2') do |config|
     end
   end
   n_slaves.each do |slave_id|
-    slave = "#{host_prefix}-qserv-#{slave_id}"
+    slave = "#{HOST_PREFIX}-qserv-#{slave_id}"
     config.vm.define slave do |define|
       define.vm.hostname = "#{slave}"
       define.vm.provider :openstack do |provider, override|
