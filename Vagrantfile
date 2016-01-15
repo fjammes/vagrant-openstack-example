@@ -44,7 +44,6 @@ hostfile = PrivateIpManager.new()
 
 Vagrant.configure('2') do |config|
   config.ssh.username = 'ubuntu'
-  config.hostmanager.enabled = true
   config.hostmanager.manage_host = false
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
@@ -56,7 +55,7 @@ Vagrant.configure('2') do |config|
     config.vm.define slave do |define|
       define.vm.hostname = "#{slave}"
       define.vm.provider :openstack do |provider, override|
-        provider.image = 'e6a3a7fb-10a2-47e0-a19a-d40e17821100'
+        provider.image = 'ab37e794-5759-41da-9743-891fd816e42e'
       end
   end
 end
