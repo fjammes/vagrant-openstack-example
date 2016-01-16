@@ -24,7 +24,7 @@ Vagrant.configure('2') do |config|
     config.vm.define slave do |define|
       define.vm.hostname = "#{slave}"
       define.vm.provider :openstack do |provider, override|
-        provider.image = 'ab37e794-5759-41da-9743-891fd816e42e'
+        provider.image = '7f10239f-fa1c-47c6-bbce-a5a54b3ee665'
       end
   end
 end
