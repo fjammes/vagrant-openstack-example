@@ -4,6 +4,7 @@ HOST_PREFIX="fjammes"
 
 required_plugins = %w{
   vagrant-openstack-provider
+  vagrant-hostmanager
 }
 
 plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
@@ -17,8 +18,38 @@ def n_slaves
     (1..HOST_NUMBER)
 end
 
+class PrivateIpManager
+
+  def initialize()
+    @private_ips = Hash.new()
+  end
+
+  def get_private_ip(vm)
+    if floating_ip = (vm.ssh_info && vm.ssh_info[:host])
+      unless @private_ips.has_key? vm.name 
+        private_ip_line = `vagrant ssh -c 'ip route get 1' #{vm.name}`.split("\n").first
+        private_ip = private_ip_line.split.last
+        @private_ips[vm.name] = private_ip
+      else
+        private_ip = @private_ips[vm.name]
+      end
+      puts "Add entry: #{private_ip} #{vm.name}"
+      private_ip
+    end
+  end
+
+end
+
+hostfile = PrivateIpManager.new()
+
 Vagrant.configure('2') do |config|
   config.ssh.username = 'ubuntu'
+  config.hostmanager.manage_host = false
+  config.hostmanager.ignore_private_ip = false
+  config.hostmanager.include_offline = true
+  config.hostmanager.ip_resolver = proc do |vm, resolving_vm|
+    hostfile.get_private_ip(vm)
+  end
   n_slaves.each do |slave_id|
     slave = "#{HOST_PREFIX}-qserv-#{slave_id}"
     config.vm.define slave do |define|
