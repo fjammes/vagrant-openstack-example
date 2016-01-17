@@ -55,7 +55,7 @@ Vagrant.configure('2') do |config|
     config.vm.define slave do |define|
       define.vm.hostname = "#{slave}"
       define.vm.provider :openstack do |provider, override|
-        provider.image = '7f10239f-fa1c-47c6-bbce-a5a54b3ee665'
+        provider.image = 'ubuntu-15.04-docker'
       end
   end
 end
