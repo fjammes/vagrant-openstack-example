@@ -1,4 +1,4 @@
-example
+How to use Vagrant+NCSA openstack to boot Qserv vm
 ==
 
 # Pre-requisites
