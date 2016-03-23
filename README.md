@@ -22,6 +22,7 @@ download LSST-openrc.sh from https://nebula.ncsa.illinois.edu/
 # Monitor and start VM
 
 ```
+$ ln -s Vagrantfile.ncsa Vagrantfile
 $ vagrant up
 $ vagrant status
 ```
