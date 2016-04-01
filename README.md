@@ -16,13 +16,15 @@ download LSST-openrc.sh from https://nebula.ncsa.illinois.edu/
 
 `Access & Security` -> `API Access` -> `Download OpenStack RC File`
 
-    source LSST-openrc.sh
-    <input nebula password>
+```
+$ cd ncsa
+$ source LSST-openrc.sh
+<input nebula password>
+```
 
 # Monitor and start VM
 
 ```
-$ ln -s Vagrantfile.ncsa Vagrantfile
 $ vagrant up
 $ vagrant status
 ```
