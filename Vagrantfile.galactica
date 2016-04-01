@@ -66,7 +66,7 @@ end
     os.password           = ENV['OS_PASSWORD']
     os.tenant_name        = ENV['OS_PROJECT_NAME']
     os.openstack_auth_url = ENV['OS_AUTH_URL']
-    os.flavor             = 'r1.medium'
+    os.flavor             = 'm1.small'
     os.floating_ip_pool   = 'ext-net'
     os.networks           = 'petasky-net'
     os.security_groups    = ['default', 'remote SSH']
